@@ -1,0 +1,52 @@
+/* 
+  Localizable.strings
+  Loan
+
+  Created by JiaLi on 16/8/24.
+  Copyright © 2016年 JiaLi. All rights reserved.
+*/
+
+"STRING_APP_TITLE" = "北京房贷计算器";
+
+"STRING_SUBMIT" = "计算房贷";
+
+"STRING_YES" = "是";
+"STRING_NO" = "否";
+"STRING_HOUSE" = "住宅";
+"STRING_BISINESS" = "商用";
+"STRING_PUBLIC" = "公房";
+
+"STRING_AREA" = "面积";
+"STRING_TRANSACTION_PRICE" = "成交价";
+"STRING_NET_PRICE" = "网签价";
+"STRING_HOUSE_NATURE" = "房屋性质";
+"STRING_HOUSE_ORIGINAL_VALUE" = "原值";
+"STRING_HOUSE_FIRST" = "首套购房";
+"STRING_HOUSE_DEED_TEXT" = "契税";
+"STRING_HOUSE_FIVEYEARS_ONLYONE" = "是否满5唯一";
+"STRING_HOUSE_PERSONAL_TAX" = "个税";
+"STRING_HOUSE_TWOYEARS" = "是否满2年";
+"STRING_HOUSE_SALE_TAX" = "营业税";
+"STRING_HOUSE_AGENCY" = "链家";
+"STRING_HOUSE_FEESFORASSIGNMENT" = "土地出让金";
+"STRING_HOUSE_RATIO_OF_LOAN" = "货款比例";
+"STRING_HOUSE_DOWN_PAYMENT" = "首付";
+"STRING_HOUSE_TOTAL_PRICE" = "总成交价";
+
+
+"STRING_AREA_UNIT" = "平米";
+"STRING_AREA_UNIT_PRICE" = "万元";
+
+"STRING_HOUSE_NATURE_INFO" = "住宅（70年），商住（40-50年），公房，默认住宅";
+"STRING_HOUSE_ORIGINAL_VALUE_INFO" = "公房原价为0，不可修改，购房发票值";
+"STRING_HOUSE_FIRST_INFO" = "";
+"STRING_HOUSE_DEED_TEXT_INFO" = "首套房且面积小于等于90平1%，首套大于90 ：1.5%，二套房3%，如果不写面积默认小于90平，按1%计算";
+"STRING_HOUSE_FIVEYEARS_ONLYONE_INFO" = "";
+"STRING_HOUSE_PERSONAL_TAX_INFO" = "满5唯一:0 %,非满5唯一： 20%X差额：（网签价-原值-网签价*10%）*20%，公房：网签价*1%)";
+"STRING_HOUSE_TWOYEARS_INFO" = "如果前边是满足5唯一，这里置灰色，为满2年状态";
+"STRING_HOUSE_SALE_TAX_INFO" = "满足2年：住宅0%， 商住5.6%X差额（网签价-原值)*5.6%。 不满足2年：网签价*5.6%（默认满足2年）";
+"STRING_HOUSE_AGENCY_INFO" = "中介费";
+"STRING_HOUSE_FEESFORASSIGNMENT_INFO" = "单位：（万元/平）（15.6元/平*面积,仅适用于公房，其它性质为灰色状态，值为0）";
+"STRING_HOUSE_RATIO_OF_LOAN_INFO" = "（首套：70%， 二套50%）";
+"STRING_HOUSE_DOWN_PAYMENT_INFO" = "单位：（万元）成交价+契税+营业税+个税+中介费+土地出让金-贷款";
+"STRING_HOUSE_TOTAL_PRICE_INFO" = "单位：（万元） 成交价+契税+营业税+个税+中介费+土地出让金";

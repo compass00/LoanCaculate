@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="111" id="fIq-iW-rw3" customClass="MainTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="111"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fIq-iW-rw3" id="l5b-qI-DM6">
+                <rect key="frame" x="0.0" y="0.0" width="352" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3bC-yY-HO5" customClass="HouseTextField">
+                        <rect key="frame" x="218" y="14" width="102" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Ope-f5-r5H"/>
+                            <constraint firstAttribute="width" constant="100" id="rZI-WZ-KrI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUo-aE-0XW">
+                        <rect key="frame" x="30" y="14" width="190" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnu-aQ-Jm1">
+                        <rect key="frame" x="30" y="45" width="308" height="48"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gAS-eE-Ovd">
+                        <rect key="frame" x="218" y="16" width="120" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="3O0-si-WnN"/>
+                        </constraints>
+                        <segments>
+                            <segment title="First"/>
+                            <segment title="Second"/>
+                        </segments>
+                    </segmentedControl>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaP-sf-nbD" customClass="HouseTextField">
+                        <rect key="frame" x="155" y="14" width="65" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="eqp-m6-Nwf"/>
+                        </constraints>
+                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlS-rz-0Xn">
+                        <rect key="frame" x="228" y="19" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="leading" secondItem="eaP-sf-nbD" secondAttribute="trailing" id="40S-Bc-ppw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Fnu-aQ-Jm1" secondAttribute="bottom" constant="5" id="5NW-lb-hEF"/>
+                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="baseline" secondItem="eaP-sf-nbD" secondAttribute="baseline" id="C7Z-hS-Mh3"/>
+                    <constraint firstItem="eaP-sf-nbD" firstAttribute="baseline" secondItem="3bC-yY-HO5" secondAttribute="baseline" id="E5j-lB-XmS"/>
+                    <constraint firstItem="gAS-eE-Ovd" firstAttribute="leading" secondItem="eaP-sf-nbD" secondAttribute="trailing" constant="-2" id="TOi-XX-7Ie"/>
+                    <constraint firstItem="pUo-aE-0XW" firstAttribute="leading" secondItem="l5b-qI-DM6" secondAttribute="leadingMargin" constant="22" id="Vc9-o6-97Y"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pUo-aE-0XW" secondAttribute="trailing" constant="96" id="WaS-EG-7hE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3bC-yY-HO5" secondAttribute="trailing" constant="18" id="YiR-uR-aNT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gAS-eE-Ovd" secondAttribute="trailing" constant="18" id="cbE-0g-R00"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Fnu-aQ-Jm1" secondAttribute="trailing" constant="18" id="cie-DH-ohO"/>
+                    <constraint firstItem="Fnu-aQ-Jm1" firstAttribute="leading" secondItem="l5b-qI-DM6" secondAttribute="leadingMargin" constant="22" id="ghe-Ed-lPa"/>
+                    <constraint firstItem="3bC-yY-HO5" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="qIs-BD-pUU"/>
+                    <constraint firstItem="pUo-aE-0XW" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="rFh-sY-yFZ"/>
+                    <constraint firstItem="eaP-sf-nbD" firstAttribute="bottom" secondItem="pUo-aE-0XW" secondAttribute="bottom" id="vRw-Hm-W4Z"/>
+                    <constraint firstItem="Fnu-aQ-Jm1" firstAttribute="top" secondItem="eaP-sf-nbD" secondAttribute="bottom" constant="1" id="wKl-ln-5rl"/>
+                    <constraint firstItem="gAS-eE-Ovd" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="z0W-od-WD8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="houseinfo" destination="Fnu-aQ-Jm1" id="aeH-Sq-PyJ"/>
+                <outlet property="housetitle" destination="pUo-aE-0XW" id="YVZ-Eu-lRQ"/>
+                <outlet property="segmentcontroll" destination="gAS-eE-Ovd" id="xoA-45-4x9"/>
+                <outlet property="taxunit" destination="tlS-rz-0Xn" id="OZA-IT-x0O"/>
+                <outlet property="textfield" destination="3bC-yY-HO5" id="wch-Yl-6DB"/>
+                <outlet property="textfieldtax" destination="eaP-sf-nbD" id="lEn-yr-RsQ"/>
+            </connections>
+            <point key="canvasLocation" x="125" y="480.5"/>
+        </tableViewCell>
+    </objects>
+</document>
