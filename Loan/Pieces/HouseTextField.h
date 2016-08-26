@@ -6,8 +6,7 @@
 //  Copyright © 2016年 JiaLi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+#import  <UIKit/UIKit.h>
 @interface HouseTextField : UITextField
 @property(nonatomic)NSInteger row;
 @property(nonatomic)NSInteger index;

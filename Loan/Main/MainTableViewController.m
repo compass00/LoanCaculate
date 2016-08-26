@@ -51,6 +51,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 9 || indexPath.row == 11) {
+        return 56.0;
+    }
     return 88.0;
 }
 
@@ -87,13 +90,14 @@
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_NO", nil) forSegmentAtIndex:1];
 
             }
-            [cell.segmentcontroll addTarget:_houseValue action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
+            [cell.segmentcontroll addTarget:_houseDelegate action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
 
             cell.segmentcontroll.tag = indexPath.row;
             cell.segmentcontroll.hidden = !showSegment;
             cell.textfield.enabled = ![HouseStrings getEnableFiled:(HOUSEVALUETYPE)indexPath.row];
-            cell.textfieldtax.text = [_houseDelegate getDefaltTax:(HOUSEVALUETYPE)indexPath.row position:0];
-            cell.textfield.text = [_houseDelegate getDefaltTax:(HOUSEVALUETYPE)indexPath.row position:1];
+            cell.textfieldtax.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:0];
+            cell.textfield.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:1];
+            cell.segmentcontroll.selectedSegmentIndex = [_houseDelegate getSelectIndex:(HOUSEVALUETYPE)indexPath.row];
             cell.taxunit.hidden = cell.textfieldtax.hidden;
 
             cell.textfield.row = indexPath.row;

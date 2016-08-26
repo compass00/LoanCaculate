@@ -17,7 +17,7 @@
     float areaf = [area floatValue];
     float rate = 0.0f;
     if (first) {
-        rate = areaf > 90.0 ? 0.015: 0.001;
+        rate = areaf > 90.0 ? 0.015: 0.01;
     } else {
         rate = 0.03;
     }
@@ -37,6 +37,7 @@
         } else {
             rate = netPricef * 0.1;
             rate = netPricef - originalvaluef - rate;
+            rate = rate * 0.2;
         }
         return [self getStringfromFloat:rate];
     }
@@ -76,7 +77,7 @@
         return [self getStringfromFloat:0.00f];
     }
     float areaf = [area floatValue];
-    float rate = 15.6 * areaf / 10000;
+    float rate = 15.6 * areaf / 10000.0;
     return [self getStringfromFloat:rate];
 }
 

@@ -20,6 +20,7 @@
 @property (nonatomic, assign) id<HouseCalculationDelegate> calculationdelegate;
 
 - (IBAction)submit:(id)sender;
-- (IBAction)changeSegment:(id)sender;
-- (NSString*)getDefaltTax:(NSInteger)type position:(NSInteger)pos;
+- (void)changeSegment:(id)sender;
+- (NSInteger)getSelectIndex:(NSInteger)type;
+- (NSString*)getDefaultValue:(NSInteger)type position:(NSInteger)pos;
 @end

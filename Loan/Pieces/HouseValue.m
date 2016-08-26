@@ -121,11 +121,11 @@
 
 
 - (void)setIsFirst:(BOOL)value {
-    [_valuedic setObject:@(value) forKey:KEY_HOUSEVALUETYPE_ORIGINAL_VALUE];
+    [_valuedic setObject:@(value) forKey:KEY_HOUSEVALUETYPE_FIRST];
 }
 
 - (BOOL)getIsFirst {
-    NSString* value = [_valuedic objectForKey:KEY_HOUSEVALUETYPE_ORIGINAL_VALUE];
+    NSString* value = [_valuedic objectForKey:KEY_HOUSEVALUETYPE_FIRST];
     if (value != nil) {
         return [value integerValue];
     }
@@ -327,7 +327,7 @@
     NSString* value =  [_valuedic objectForKey:KEY_HOUSEVALUETYPE_RATIO_OF_LOAN];
     if (value == nil || value.length < 1) {
         value = @"70";
-        [self setAgency:value];
+        [self setRatioOfLoan:value];
     }
     return value;
 
