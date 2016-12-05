@@ -113,6 +113,9 @@
             // 2
         case  HOUSEVALUETYPE_NET_PRICE:
             return NSLocalizedString(@"STRING_AREA_UNIT_PRICE", nil);
+        default:
+            return @"";
+            /*
             // 3
         case  HOUSEVALUETYPE_HOME_VALUE:
             return NSLocalizedString(@"STRING_HOUSE_NATURE_INFO", nil);
@@ -154,7 +157,7 @@
             return NSLocalizedString(@"STRING_HOUSE_TOTAL_PRICE_INFO", nil);
             
         default:
-            return @"";
+            return @"";*/
     }
 
 }

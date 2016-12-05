@@ -56,10 +56,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 11) {
+    /*if (indexPath.row < 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 11) {
         return 56.0;
     }
-    return 88.0;
+    return 88.0;*/
+    return 56.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
