@@ -175,6 +175,7 @@
 				TargetAttributes = {
 					0D3BC5481D6D7D5900D2E482 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8H5A2AGZ9L;
 					};
 				};
 			};
@@ -349,7 +350,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8H5A2AGZ9L;
 				INFOPLIST_FILE = Loan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.topalpha.Loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -360,7 +363,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8H5A2AGZ9L;
 				INFOPLIST_FILE = Loan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.topalpha.Loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";

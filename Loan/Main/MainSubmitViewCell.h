@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MainSubmitViewCellDelegate <NSObject>
+
+- (void)onClickSumblit:(UIButton*)button;
+
+@end
 @interface MainSubmitViewCell : UITableViewCell
 @property(strong) IBOutlet UIButton* submitbuttom;
+@property(atomic, assign)id<MainSubmitViewCellDelegate> delegate;
+
 +(instancetype)loadfromNib;
+- (IBAction)onClickSumblit:(id)sender;
 
 @end

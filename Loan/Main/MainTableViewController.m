@@ -32,6 +32,11 @@
     self.title = NSLocalizedString(@"STRING_APP_TITLE", @"STRING_APP_TITLE");
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
+    [button setBackgroundColor:[UIColor blackColor]];
+    [button.layer setCornerRadius:5.0];
+    [button setTitle:NSLocalizedString(@"STRING_SNAP", @"STRING_SNAP") forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.tableView.allowsSelection = NO;
 }
 
@@ -66,6 +71,7 @@
         if (cell != nil) {
             [cell.submitbuttom setTitle:NSLocalizedString(@"STRING_SUBMIT", nil) forState:UIControlStateNormal];
             [cell.submitbuttom addTarget:_houseValue action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+            cell.delegate = (id)self;
         }
         
         return cell;
@@ -158,6 +164,10 @@
 
 -(void)didCalculate {
     [self.tableView reloadData];
+}
+
+- (void)onClickSumblit:(UIButton*)button {
+    [self didCalculate];
 }
 
 @end

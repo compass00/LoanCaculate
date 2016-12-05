@@ -50,3 +50,4 @@
 "STRING_HOUSE_RATIO_OF_LOAN_INFO" = "（首套：70%， 二套50%）";
 "STRING_HOUSE_DOWN_PAYMENT_INFO" = "单位：（万元）成交价+契税+营业税+个税+中介费+土地出让金-贷款";
 "STRING_HOUSE_TOTAL_PRICE_INFO" = "单位：（万元） 成交价+契税+营业税+个税+中介费+土地出让金";
+"STRING_SNAP" = "全屏截图";

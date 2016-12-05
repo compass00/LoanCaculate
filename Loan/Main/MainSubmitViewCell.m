@@ -28,4 +28,10 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)onClickSumblit:(id)sender {
+    if (self.delegate != nil) {
+        [self.delegate  onClickSumblit:sender];
+    }
+}
+
 @end
