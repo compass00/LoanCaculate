@@ -36,6 +36,7 @@
     [button setBackgroundColor:[UIColor blackColor]];
     [button.layer setCornerRadius:5.0];
     [button setTitle:NSLocalizedString(@"STRING_SNAP", @"STRING_SNAP") forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(snap) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.tableView.allowsSelection = NO;
 }
@@ -169,6 +170,54 @@
 
 - (void)onClickSumblit:(UIButton*)button {
     [self didCalculate];
+}
+
+- (void)snap {
+    UIImage* savedImage  = [self imageWithView1:self.tableView];
+    [self saveImageToPhotos:savedImage];
+}
+
+- (UIImage *) imageWithView1:(UIView *)view{
+    UIImage *img;
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
+- (void)saveImageToPhotos:(UIImage*)savedImage {
+    
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    
+}
+
+// 指定回调方法
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
+    
+    NSString *msg = nil ;
+    if(error != NULL){
+        
+        msg = @"保存图片失败" ;
+        
+    }else{
+        
+        msg = @"保存图片成功" ;
+        
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
+                          
+                                                    message:msg
+                          
+                                                   delegate:self
+                          
+                                          cancelButtonTitle:@"确定"
+                          
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+    
 }
 
 @end
