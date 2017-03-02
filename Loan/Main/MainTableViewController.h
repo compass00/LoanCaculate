@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol MainTableViewDelegate <NSObject>
+
+- (void)onTouchEnd;
+
+@end
+@interface MainTableView : UITableView
+@property (nonatomic, assign) id<MainTableViewDelegate> mainTableviewdelegate;
+
+@end
 
 @interface MainTableViewController : UITableViewController
+
 - (void)onClickSumblit:(UIButton*)button;
 
 @end

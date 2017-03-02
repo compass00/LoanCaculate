@@ -23,4 +23,5 @@
 - (void)changeSegment:(id)sender;
 - (NSInteger)getSelectIndex:(NSInteger)type;
 - (NSString*)getDefaultValue:(NSInteger)type position:(NSInteger)pos;
+- (void)resginKeyboard;
 @end

@@ -9,16 +9,26 @@
 #import "HouseDelegate.h"
 #import "HouseTextField.h"
 #import "HouseStrings.h"
-
+@interface HouseDelegate() {
+    UITextField* _currentTextField;
+}
+@end
 @implementation HouseDelegate
 -(id)init {
     self = [super init];
     _housevalue = [[HouseValue alloc] init];
+    _currentTextField = nil;
     return self;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField          // became first responder
+{
+    _currentTextField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;             // may be called if forced even if shouldEndEditing
 {
+    _currentTextField = textField;
     if (_housevalue == nil) {
         return;
     }
@@ -344,4 +354,11 @@
     return @"0";
 
 }
+
+- (void)resginKeyboard {
+    if (_currentTextField != nil) {
+        [_currentTextField resignFirstResponder];
+    }
+}
+
 @end

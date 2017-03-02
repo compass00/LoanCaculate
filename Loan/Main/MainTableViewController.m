@@ -13,6 +13,17 @@
 #import "HouseDelegate.h"
 
 #define COUNT 17
+
+@implementation MainTableView
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    if (self.mainTableviewdelegate !=  nil) {
+        [self.mainTableviewdelegate onTouchEnd];
+    }
+}
+@end
+
 @interface MainTableViewController ()
 @property (strong)HouseValue* houseValue;
 @property (strong)HouseDelegate* houseDelegate;
@@ -26,6 +37,8 @@
     if (_houseDelegate == nil) {
         _houseDelegate = [[HouseDelegate alloc] init];
         _houseDelegate.calculationdelegate = (id)self;
+        MainTableView* mv = (MainTableView*)self.tableView;
+        mv.mainTableviewdelegate = (id)self;
     }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -89,6 +102,8 @@
             cell.textfieldtax.hidden = ![HouseStrings getShowTaxFiled:(HOUSEVALUETYPE)indexPath.row];
             cell.textfield.delegate = _houseDelegate;
             cell.textfieldtax.delegate = _houseDelegate;
+            cell.textfield.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            cell.textfield.returnKeyType = UIReturnKeyDone;
             if (indexPath.row == HOUSEVALUETYPE_HOME_VALUE) {
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_HOUSE", nil) forSegmentAtIndex:0];
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_BISINESS", nil) forSegmentAtIndex:1];
@@ -117,6 +132,7 @@
         return cell;
 
     }
+    
  }
 
 
@@ -218,6 +234,14 @@
     
     [alert show];
     
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self resignFirstResponder];
+}
+
+- (void)onTouchEnd {
+    [_houseDelegate resginKeyboard];
 }
 
 @end
