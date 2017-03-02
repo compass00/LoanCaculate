@@ -146,6 +146,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 {
     //HouseTextField* t = (HouseTextField*)textField;
+    [textField resignFirstResponder];
     return YES;
 }
 
