@@ -64,8 +64,8 @@
             break;
         }
             // 3
-        case  HOUSEVALUETYPE_HOME_VALUE:
-            break;
+        /*case  HOUSEVALUETYPE_HOME_VALUE:
+            break;*/
             // 4
         case  HOUSEVALUETYPE_ORIGINAL_VALUE:
         {
@@ -183,9 +183,9 @@
 
 - (void)changeSegment:(id)sender {
     UISegmentedControl* segment = (UISegmentedControl*)sender;
-    if (segment.tag == HOUSEVALUETYPE_HOME_VALUE) {
+    /*if (segment.tag == HOUSEVALUETYPE_HOME_VALUE) {
         [_housevalue setHomeValue:segment.selectedSegmentIndex];
-    } else if (segment.tag == HOUSEVALUETYPE_FIRST) {
+    } else*/ if (segment.tag == HOUSEVALUETYPE_FIRST) {
         [_housevalue setIsFirst:!segment.selectedSegmentIndex];
     } else if (segment.tag == HOUSEVALUETYPE_FIVEYEARS_ONLYONE) {
         [_housevalue setIsFiveYearsAndOnlyOne:!segment.selectedSegmentIndex];
@@ -199,8 +199,8 @@
 
 - (NSInteger)getSelectIndex:(NSInteger)type {
     switch (type) {
-        case HOUSEVALUETYPE_HOME_VALUE:
-            return [_housevalue getHomeValue];
+        //case HOUSEVALUETYPE_HOME_VALUE:
+        //    return [_housevalue getHomeValue];
         case HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
             return ![_housevalue getIsFiveYearsAndOnlyOne];
         case HOUSEVALUETYPE_TWOYEARS:
@@ -243,11 +243,11 @@
             break;
         }
             // 3
-        case  HOUSEVALUETYPE_HOME_VALUE:
+        /*case  HOUSEVALUETYPE_HOME_VALUE:
             if (pos == 1) {
                 return [NSString stringWithFormat:@"%d", [_housevalue getHomeValue]];
             }
-            break;
+            break;*/
             // 4
         case  HOUSEVALUETYPE_ORIGINAL_VALUE:
         {

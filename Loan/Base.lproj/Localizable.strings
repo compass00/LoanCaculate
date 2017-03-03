@@ -12,9 +12,9 @@
 
 "STRING_YES" = "是";
 "STRING_NO" = "否";
-"STRING_HOUSE" = "住宅";
-"STRING_BISINESS" = "商用";
-"STRING_PUBLIC" = "公房";
+"STRING_HOUSE" = "  住宅  ";
+"STRING_BISINESS" = "  商用  ";
+"STRING_PUBLIC" = "  公房  ";
 
 "STRING_AREA" = "面积";
 "STRING_TRANSACTION_PRICE" = "成交价";

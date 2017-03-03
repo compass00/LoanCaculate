@@ -18,7 +18,7 @@
         sharedInstance = [[NSArray alloc] initWithObjects:NSLocalizedString(@"STRING_AREA", nil),
                           NSLocalizedString(@"STRING_TRANSACTION_PRICE", nil),
                           NSLocalizedString(@"STRING_NET_PRICE", nil),
-                          NSLocalizedString(@"STRING_HOUSE_NATURE", nil),
+                          //NSLocalizedString(@"STRING_HOUSE_NATURE", nil),
                           NSLocalizedString(@"STRING_HOUSE_ORIGINAL_VALUE", nil),
                           NSLocalizedString(@"STRING_HOUSE_FIRST", nil),
                           NSLocalizedString(@"STRING_HOUSE_DEED_TEXT", nil),
@@ -163,7 +163,7 @@
 }
 
 +(BOOL)getShowSegment:(HOUSEVALUETYPE)type {
-    if (type == HOUSEVALUETYPE_FIRST || type == HOUSEVALUETYPE_HOME_VALUE ||  type == HOUSEVALUETYPE_FIVEYEARS_ONLYONE || type == HOUSEVALUETYPE_TWOYEARS) {
+    if (type == HOUSEVALUETYPE_FIRST ||  type == HOUSEVALUETYPE_FIVEYEARS_ONLYONE || type == HOUSEVALUETYPE_TWOYEARS) {
         return YES;
     }
     return NO;

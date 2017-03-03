@@ -12,7 +12,7 @@
 #import "HouseStrings.h"
 #import "HouseDelegate.h"
 
-#define COUNT 17
+#define COUNT 16
 
 @implementation MainTableView
 
@@ -42,7 +42,7 @@
     }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.title = NSLocalizedString(@"STRING_APP_TITLE", @"STRING_APP_TITLE");
+    //self.title = NSLocalizedString(@"STRING_APP_TITLE", @"STRING_APP_TITLE");
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
@@ -52,6 +52,12 @@
     [button addTarget:self action:@selector(snap) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.tableView.allowsSelection = NO;
+    UISegmentedControl* segment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"STRING_HOUSE", @"STRING_HOUSE"), NSLocalizedString(@"STRING_BISINESS", @"STRING_SNAP"), NSLocalizedString(@"STRING_PUBLIC", @"STRING_PUBLIC"), nil]];
+    segment.segmentedControlStyle = UISegmentedControlStyleBar;
+
+
+    [self.navigationController.navigationBar addSubview:segment];
+    segment.center = CGPointMake(self.navigationController.navigationBar.center.x, self.navigationController.navigationBar.center.y - 20);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,15 +110,15 @@
             cell.textfieldtax.delegate = _houseDelegate;
             cell.textfield.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             cell.textfield.returnKeyType = UIReturnKeyDone;
-            if (indexPath.row == HOUSEVALUETYPE_HOME_VALUE) {
+            /*if (indexPath.row == HOUSEVALUETYPE_HOME_VALUE) {
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_HOUSE", nil) forSegmentAtIndex:0];
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_BISINESS", nil) forSegmentAtIndex:1];
                 [cell.segmentcontroll insertSegmentWithTitle:NSLocalizedString(@"STRING_PUBLIC", nil) atIndex:2 animated:NO];
-            } else {
+            } else {*/
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_YES", nil) forSegmentAtIndex:0];
                 [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_NO", nil) forSegmentAtIndex:1];
 
-            }
+            //}
             [cell.segmentcontroll addTarget:_houseDelegate action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
 
             cell.segmentcontroll.tag = indexPath.row;
@@ -194,12 +200,26 @@
 }
 
 - (UIImage *) imageWithView1:(UIView *)view{
-    UIImage *img;
-    UIGraphicsBeginImageContext(view.bounds.size);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    img = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *viewImage = nil;
+    UITableView *scrollView = self.tableView;
+    CGSize sz = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height - 56);
+    UIGraphicsBeginImageContextWithOptions(sz, scrollView.opaque, 0.0);
+    {
+        CGPoint savedContentOffset = scrollView.contentOffset;
+        CGRect savedFrame = scrollView.frame;
+        
+        scrollView.contentOffset = CGPointZero;
+        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height);
+        
+        [scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        viewImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        scrollView.contentOffset = savedContentOffset;
+        scrollView.frame = savedFrame;
+    }
     UIGraphicsEndImageContext();
-    return img;
+    
+    return viewImage;
 }
 
 - (void)saveImageToPhotos:(UIImage*)savedImage {
