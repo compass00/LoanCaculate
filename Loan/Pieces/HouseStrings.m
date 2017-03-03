@@ -20,11 +20,11 @@
                           NSLocalizedString(@"STRING_NET_PRICE", nil),
                           //NSLocalizedString(@"STRING_HOUSE_NATURE", nil),
                           NSLocalizedString(@"STRING_HOUSE_ORIGINAL_VALUE", nil),
-                          NSLocalizedString(@"STRING_HOUSE_FIRST", nil),
+                          //NSLocalizedString(@"STRING_HOUSE_FIRST", nil),
                           NSLocalizedString(@"STRING_HOUSE_DEED_TEXT", nil),
-                          NSLocalizedString(@"STRING_HOUSE_FIVEYEARS_ONLYONE", nil),
+                          //NSLocalizedString(@"STRING_HOUSE_FIVEYEARS_ONLYONE", nil),
                           NSLocalizedString(@"STRING_HOUSE_PERSONAL_TAX", nil),
-                          NSLocalizedString(@"STRING_HOUSE_TWOYEARS", nil),
+                          //NSLocalizedString(@"STRING_HOUSE_TWOYEARS", nil),
                           NSLocalizedString(@"STRING_HOUSE_SALE_TAX", nil),
                           NSLocalizedString(@"STRING_HOUSE_AGENCY", nil),
                           NSLocalizedString(@"STRING_HOUSE_FEESFORASSIGNMENT", nil),
@@ -163,9 +163,9 @@
 }
 
 +(BOOL)getShowSegment:(HOUSEVALUETYPE)type {
-    if (type == HOUSEVALUETYPE_FIRST ||  type == HOUSEVALUETYPE_FIVEYEARS_ONLYONE || type == HOUSEVALUETYPE_TWOYEARS) {
+    /*if (type == HOUSEVALUETYPE_FIRST ||  type == HOUSEVALUETYPE_FIVEYEARS_ONLYONE || type == HOUSEVALUETYPE_TWOYEARS) {
         return YES;
-    }
+    }*/
     return NO;
 }
 

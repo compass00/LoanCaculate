@@ -75,8 +75,8 @@
             break;
             
         }            // 5
-        case  HOUSEVALUETYPE_FIRST:
-            break;
+        //case  HOUSEVALUETYPE_FIRST:
+        //    break;
         case  HOUSEVALUETYPE_DEED_TAX:
         {
             if (t.index == 0) {
@@ -85,8 +85,8 @@
             break;
         }
             // 7
-        case  HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
-            break;
+        //case  HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
+        //    break;
             // 8
         case  HOUSEVALUETYPE_PERSONAL_TAX:
         {
@@ -96,8 +96,8 @@
             break;
         }
            // 9
-        case  HOUSEVALUETYPE_TWOYEARS:
-            break;
+       // case  HOUSEVALUETYPE_TWOYEARS:
+            //    break;
             // 10
         case  HOUSEVALUETYPE_SALE_TAX:
         {
@@ -185,20 +185,20 @@
     UISegmentedControl* segment = (UISegmentedControl*)sender;
     /*if (segment.tag == HOUSEVALUETYPE_HOME_VALUE) {
         [_housevalue setHomeValue:segment.selectedSegmentIndex];
-    } else*/ if (segment.tag == HOUSEVALUETYPE_FIRST) {
+    } else if (segment.tag == HOUSEVALUETYPE_FIRST) {
         [_housevalue setIsFirst:!segment.selectedSegmentIndex];
     } else if (segment.tag == HOUSEVALUETYPE_FIVEYEARS_ONLYONE) {
         [_housevalue setIsFiveYearsAndOnlyOne:!segment.selectedSegmentIndex];
     } else if (segment.tag == HOUSEVALUETYPE_TWOYEARS) {
         [_housevalue setIsTwoYears:!segment.selectedSegmentIndex];
-    }
+    }*/
     if (self.calculationdelegate != nil) {
         [self.calculationdelegate didCalculate];
     }
 }
 
 - (NSInteger)getSelectIndex:(NSInteger)type {
-    switch (type) {
+    /*switch (type) {
         //case HOUSEVALUETYPE_HOME_VALUE:
         //    return [_housevalue getHomeValue];
         case HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
@@ -210,7 +210,7 @@
    
         default:
             break;
-    }
+    }*/
     return 0;
 }
 
@@ -257,11 +257,11 @@
             break;
             
         }            // 5
-        case  HOUSEVALUETYPE_FIRST:
+        /*case  HOUSEVALUETYPE_FIRST:
             if (pos == 1) {
                 return [NSString stringWithFormat:@"%d", [_housevalue getIsFirst]];
             }
-            break;
+            break;*/
         case  HOUSEVALUETYPE_DEED_TAX:
         {
             if (pos == 0) {
@@ -272,11 +272,11 @@
             break;
         }
             // 7
-        case  HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
+       /* case  HOUSEVALUETYPE_FIVEYEARS_ONLYONE:
             if (pos == 1) {
                 return [NSString stringWithFormat:@"%d", [_housevalue getIsFiveYearsAndOnlyOne]];
             }
-            break;
+            break;*/
             // 8
         case  HOUSEVALUETYPE_PERSONAL_TAX:
         {
@@ -288,11 +288,11 @@
             break;
         }
             // 9
-        case  HOUSEVALUETYPE_TWOYEARS:
+        /*case  HOUSEVALUETYPE_TWOYEARS:
             if (pos == 1) {
                 return [NSString stringWithFormat:@"%d", [_housevalue getIsTwoYears]];
             }
-            break;
+            break;*/
             // 10
         case  HOUSEVALUETYPE_SALE_TAX:
         {

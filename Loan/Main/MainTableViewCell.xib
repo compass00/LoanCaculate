@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,20 +34,10 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gAS-eE-Ovd">
-                        <rect key="frame" x="218" y="16" width="120" height="29"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="120" id="3O0-si-WnN"/>
-                        </constraints>
-                        <segments>
-                            <segment title="First"/>
-                            <segment title="Second"/>
-                        </segments>
-                    </segmentedControl>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaP-sf-nbD" customClass="HouseTextField">
                         <rect key="frame" x="155" y="14" width="65" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="eqp-m6-Nwf"/>
+                            <constraint firstAttribute="width" constant="60" id="gq5-3U-aVT"/>
                         </constraints>
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -67,26 +57,22 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="leading" secondItem="eaP-sf-nbD" secondAttribute="trailing" id="40S-Bc-ppw"/>
-                    <constraint firstItem="pUo-aE-0XW" firstAttribute="leading" secondItem="Fnu-aQ-Jm1" secondAttribute="trailing" constant="-90" id="6Og-Ic-0R4"/>
-                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="baseline" secondItem="eaP-sf-nbD" secondAttribute="baseline" id="C7Z-hS-Mh3"/>
-                    <constraint firstItem="eaP-sf-nbD" firstAttribute="baseline" secondItem="3bC-yY-HO5" secondAttribute="baseline" id="E5j-lB-XmS"/>
-                    <constraint firstItem="gAS-eE-Ovd" firstAttribute="leading" secondItem="eaP-sf-nbD" secondAttribute="trailing" constant="-2" id="TOi-XX-7Ie"/>
+                    <constraint firstItem="pUo-aE-0XW" firstAttribute="centerY" secondItem="l5b-qI-DM6" secondAttribute="centerY" id="Ccx-hj-Tup"/>
+                    <constraint firstItem="eaP-sf-nbD" firstAttribute="baseline" secondItem="tlS-rz-0Xn" secondAttribute="baseline" id="ErA-2c-mGG"/>
+                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="baseline" secondItem="3bC-yY-HO5" secondAttribute="baseline" id="Mcb-i2-qSf"/>
                     <constraint firstItem="pUo-aE-0XW" firstAttribute="leading" secondItem="l5b-qI-DM6" secondAttribute="leadingMargin" constant="22" id="Vc9-o6-97Y"/>
+                    <constraint firstItem="Fnu-aQ-Jm1" firstAttribute="centerY" secondItem="l5b-qI-DM6" secondAttribute="centerY" id="WRi-tX-Y1y"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pUo-aE-0XW" secondAttribute="trailing" constant="96" id="WaS-EG-7hE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="3bC-yY-HO5" secondAttribute="trailing" constant="18" id="YiR-uR-aNT"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="gAS-eE-Ovd" secondAttribute="trailing" constant="18" id="cbE-0g-R00"/>
-                    <constraint firstItem="Fnu-aQ-Jm1" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="15" id="fEH-b2-tuC"/>
-                    <constraint firstItem="3bC-yY-HO5" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="qIs-BD-pUU"/>
-                    <constraint firstItem="pUo-aE-0XW" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="rFh-sY-yFZ"/>
-                    <constraint firstItem="eaP-sf-nbD" firstAttribute="bottom" secondItem="pUo-aE-0XW" secondAttribute="bottom" id="vRw-Hm-W4Z"/>
-                    <constraint firstItem="gAS-eE-Ovd" firstAttribute="top" secondItem="l5b-qI-DM6" secondAttribute="topMargin" constant="6" id="z0W-od-WD8"/>
+                    <constraint firstItem="pUo-aE-0XW" firstAttribute="leading" secondItem="Fnu-aQ-Jm1" secondAttribute="trailing" constant="-90" id="hVI-pA-jyw"/>
+                    <constraint firstItem="tlS-rz-0Xn" firstAttribute="leading" secondItem="eaP-sf-nbD" secondAttribute="trailing" constant="8" id="iOw-4s-MyH"/>
+                    <constraint firstItem="3bC-yY-HO5" firstAttribute="leading" secondItem="tlS-rz-0Xn" secondAttribute="trailing" constant="5" id="kD8-Pl-jb3"/>
+                    <constraint firstItem="3bC-yY-HO5" firstAttribute="centerY" secondItem="l5b-qI-DM6" secondAttribute="centerY" id="sxp-Jq-yr4"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="houseinfo" destination="Fnu-aQ-Jm1" id="aeH-Sq-PyJ"/>
                 <outlet property="housetitle" destination="pUo-aE-0XW" id="YVZ-Eu-lRQ"/>
-                <outlet property="segmentcontroll" destination="gAS-eE-Ovd" id="xoA-45-4x9"/>
                 <outlet property="taxunit" destination="tlS-rz-0Xn" id="OZA-IT-x0O"/>
                 <outlet property="textfield" destination="3bC-yY-HO5" id="wch-Yl-6DB"/>
                 <outlet property="textfieldtax" destination="eaP-sf-nbD" id="lEn-yr-RsQ"/>

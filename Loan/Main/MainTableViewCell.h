@@ -14,7 +14,6 @@
 @property(strong) IBOutlet HouseTextField* textfieldtax;
 @property(strong) IBOutlet UILabel* taxunit;
 @property(strong) IBOutlet HouseTextField* textfield;
-@property(strong) IBOutlet UISegmentedControl* segmentcontroll;
 
 +(instancetype)loadfromNib;
 @end

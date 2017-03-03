@@ -12,7 +12,7 @@
 #import "HouseStrings.h"
 #import "HouseDelegate.h"
 
-#define COUNT 16
+#define COUNT 13
 
 @implementation MainTableView
 
@@ -79,7 +79,7 @@
         return 56.0;
     }
     return 88.0;*/
-    return 56.0;
+    return 44.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,23 +109,13 @@
             cell.textfieldtax.delegate = _houseDelegate;
             cell.textfield.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             cell.textfield.returnKeyType = UIReturnKeyDone;
-            /*if (indexPath.row == HOUSEVALUETYPE_HOME_VALUE) {
-                [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_HOUSE", nil) forSegmentAtIndex:0];
-                [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_BISINESS", nil) forSegmentAtIndex:1];
-                [cell.segmentcontroll insertSegmentWithTitle:NSLocalizedString(@"STRING_PUBLIC", nil) atIndex:2 animated:NO];
-            } else {*/
-                [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_YES", nil) forSegmentAtIndex:0];
-                [cell.segmentcontroll setTitle:NSLocalizedString(@"STRING_NO", nil) forSegmentAtIndex:1];
+            cell.textfieldtax.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            cell.textfieldtax.returnKeyType = UIReturnKeyDone;
 
-            //}
-            [cell.segmentcontroll addTarget:_houseDelegate action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
-
-            cell.segmentcontroll.tag = indexPath.row;
-            cell.segmentcontroll.hidden = !showSegment;
             cell.textfield.enabled = ![HouseStrings getEnableFiled:(HOUSEVALUETYPE)indexPath.row];
             cell.textfieldtax.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:0];
             cell.textfield.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:1];
-            cell.segmentcontroll.selectedSegmentIndex = [_houseDelegate getSelectIndex:(HOUSEVALUETYPE)indexPath.row];
+           
             cell.taxunit.hidden = cell.textfieldtax.hidden;
 
             cell.textfield.row = indexPath.row;
