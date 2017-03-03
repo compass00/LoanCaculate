@@ -231,9 +231,9 @@
 // 指定回调方法
 - (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
     
-    NSString *msg = error == nil ?  @"保存图片成功" : @"保存图片失败";
+    NSString *msg = error == nil ?  @"已将结果成功保存到相册" : @"保存图像失败";
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存成功"
                           
                                                     message:msg
                           
