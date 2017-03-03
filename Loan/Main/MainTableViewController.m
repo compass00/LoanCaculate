@@ -46,15 +46,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
-    [button setBackgroundColor:[UIColor blackColor]];
+    [button setBackgroundColor:[UIColor colorWithRed:154.0/255.0 green:222.0/255.0 blue:134.0/255 alpha:1.0]];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button.layer setCornerRadius:5.0];
     [button setTitle:NSLocalizedString(@"STRING_SNAP", @"STRING_SNAP") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(snap) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.tableView.allowsSelection = NO;
     UISegmentedControl* segment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"STRING_HOUSE", @"STRING_HOUSE"), NSLocalizedString(@"STRING_BISINESS", @"STRING_SNAP"), NSLocalizedString(@"STRING_PUBLIC", @"STRING_PUBLIC"), nil]];
-    segment.segmentedControlStyle = UISegmentedControlStyleBar;
-
 
     [self.navigationController.navigationBar addSubview:segment];
     segment.center = CGPointMake(self.navigationController.navigationBar.center.x, self.navigationController.navigationBar.center.y - 20);
