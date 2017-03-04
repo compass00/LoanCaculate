@@ -15,16 +15,20 @@
     static NSArray *sharedInstance = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
-        sharedInstance = [[NSArray alloc] initWithObjects:NSLocalizedString(@"STRING_AREA", nil),
+        sharedInstance = [[NSArray alloc] initWithObjects:@"",
+                          NSLocalizedString(@"STRING_AREA", nil),
                           NSLocalizedString(@"STRING_TRANSACTION_PRICE", nil),
                           NSLocalizedString(@"STRING_NET_PRICE", nil),
                           //NSLocalizedString(@"STRING_HOUSE_NATURE", nil),
                           NSLocalizedString(@"STRING_HOUSE_ORIGINAL_VALUE", nil),
-                          //NSLocalizedString(@"STRING_HOUSE_FIRST", nil),
+
+                          NSLocalizedString(@"STRING_HOUSE_FIRST", nil),
+
                           NSLocalizedString(@"STRING_HOUSE_DEED_TEXT", nil),
                           //NSLocalizedString(@"STRING_HOUSE_FIVEYEARS_ONLYONE", nil),
+                          NSLocalizedString(@"STRING_HOUSE_TWOYEARS", nil),
+
                           NSLocalizedString(@"STRING_HOUSE_PERSONAL_TAX", nil),
-                          //NSLocalizedString(@"STRING_HOUSE_TWOYEARS", nil),
                           NSLocalizedString(@"STRING_HOUSE_SALE_TAX", nil),
                           NSLocalizedString(@"STRING_HOUSE_AGENCY", nil),
                           NSLocalizedString(@"STRING_HOUSE_FEESFORASSIGNMENT", nil),

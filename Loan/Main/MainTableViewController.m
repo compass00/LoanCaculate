@@ -11,8 +11,17 @@
 #import "MainSubmitViewCell.h"
 #import "HouseStrings.h"
 #import "HouseDelegate.h"
+#import "MainFirstTableViewCell.h"
+#import "MainHourseYearsTableViewCell.h"
+#import "AdBanaView.h"
 
-#define COUNT 13
+#define COUNT 16
+#define BannerHeight 56.0
+@interface MainTableViewController ()<AdBanaViewDelegate>
+{
+    AdBanaView * adview;
+}
+@end
 
 @implementation MainTableView
 
@@ -23,6 +32,7 @@
     }
 }
 @end
+
 
 @interface MainTableViewController ()
 @property (strong)HouseValue* houseValue;
@@ -65,6 +75,20 @@
 }
 
 #pragma mark - Table view data source
+/*- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;   // custom view for header. will be adjusted to default or specified header
+{
+    if (adview == nil) {
+        adview = [[AdBanaView alloc]initWithAppKey:@"20160818000355" placement:@"100145" adType:AdBanaViewTypeNormalBanner delegate:self];
+        adview.frame=CGRectMake(0,20, self.tableView.frame.size.width, 50);
+
+    }
+    return adview;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50.f;
+}*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -79,6 +103,9 @@
         return 56.0;
     }
     return 88.0;*/
+    if (indexPath.row == 0 || indexPath.row == COUNT - 1) {
+        return BannerHeight;
+    }
     return 44.0;
 }
 
@@ -95,7 +122,23 @@
         }
         
         return cell;
+    } else if (indexPath.row == 0){
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
+        if (adview == nil) {
+            adview = [[AdBanaView alloc]initWithAppKey:@"20160818000355" placement:@"100145" adType:AdBanaViewTypeNormalBanner delegate:self];
+            adview.frame=CGRectMake(0, 0, self.tableView.frame.size.width, BannerHeight);
+        }
+        [cell.contentView addSubview:adview];
 
+        return cell;
+    } else if (indexPath.row == 5){
+        MainFirstTableViewCell *cell = [MainFirstTableViewCell loadfromNib];
+        // Configure the cell...
+        return cell;
+    } else if (indexPath.row == 7){
+        MainHourseYearsTableViewCell *cell = [MainHourseYearsTableViewCell loadfromNib];
+    // Configure the cell...
+        return cell;
     } else {
         MainTableViewCell *cell = [MainTableViewCell loadfromNib];
         // Configure the cell...
@@ -191,16 +234,20 @@
 - (UIImage *) imageWithView1:(UIView *)view{
     UIImage *viewImage = nil;
     UITableView *scrollView = self.tableView;
-    CGSize sz = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height - 56);
+    CGSize sz = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height - 2 *BannerHeight);
     UIGraphicsBeginImageContextWithOptions(sz, scrollView.opaque, 0.0);
     {
+        CGContextRef newContext = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(newContext, [UIColor whiteColor].CGColor);
+        CGContextFillRect(newContext, CGRectMake(0, 0, sz.width, sz.height));
+        
         CGPoint savedContentOffset = scrollView.contentOffset;
         CGRect savedFrame = scrollView.frame;
         
-        scrollView.contentOffset = CGPointZero;
-        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height);
+        scrollView.contentOffset = CGPointMake(0, BannerHeight);
+        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height - 2 * BannerHeight);
         
-        [scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        [scrollView.layer renderInContext: newContext];
         viewImage = UIGraphicsGetImageFromCurrentImageContext();
         
         scrollView.contentOffset = savedContentOffset;
@@ -243,5 +290,33 @@
 - (void)onTouchEnd {
     [_houseDelegate resginKeyboard];
 }
+
+/**
+ *  横幅广告加载完成
+ *
+ *  @param _adapter 适配器
+ *  @param view     广告视图
+ */
+-(void)didAdBanaReceiveAdView{
+    NSLog(@"横幅广告加载成功....");
+}
+/**
+ *  横幅广告加载失败
+ *
+ *  @param _adapter 适配器
+ *  @param error    错误信息
+ */
+-(void)didAdBanaFailAd:(AdBanaError*)error{
+    
+    NSLog(@"横幅广告加载失败....");
+}
+/**
+ *  横幅广告点击事件
+ */
+-(void)didAdBanaClickAd{
+    NSLog(@"横幅广告点击了....");
+}
+
+
 
 @end
