@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RadioButton.h"
 
 @interface MainFirstTableViewCell : UITableViewCell
+@property(strong) IBOutlet RadioButton* firstButton;
+@property(strong) IBOutlet RadioButton* secondButton;
+
 +(instancetype)loadfromNib;
+
+- (void)configButton:(BOOL)isFive;
 @end

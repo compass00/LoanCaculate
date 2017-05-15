@@ -5,8 +5,14 @@
 //  Created by JiaLi on 16/8/24.
 //  Copyright © 2016年 JiaLi. All rights reserved.
 ///
+#define RGB(r, g, b)     [UIColor colorWithRed:((r)/255.0) green:((g)/255.0) blue:((b)/255.0)     alpha:1.0]
+#define RED_COLOR RGB(238, 29, 36)
+#define GREEN_COLOR  RGB(124, 182, 73)
+#define BLACK_COLOR RGB(0, 0, 0)
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 typedef NS_ENUM(NSInteger, HOUSEVALUETYPE) {
     HOUSEVALUETYPE_BANNER,
     HOUSEVALUETYPE_AREA,
@@ -27,6 +33,7 @@ typedef NS_ENUM(NSInteger, HOUSEVALUETYPE) {
     HOUSEVALUETYPE_RATIO_OF_LOAN,
     HOUSEVALUETYPE_DOWN_PAYMENT,
     HOUSEVALUETYPE_TOTAL_PRICE,
+    HOUSEVALUETYPE_SIGNLE_PRICE
 };
 
 @interface HouseStrings : NSObject
@@ -41,4 +48,7 @@ typedef NS_ENUM(NSInteger, HOUSEVALUETYPE) {
 
 + (BOOL)getEnableFiled:(HOUSEVALUETYPE)type;
 
++ (BOOL)getShowUnit:(HOUSEVALUETYPE)type;
+
++ (UIColor*)getTextColor:(HOUSEVALUETYPE)type;
 @end

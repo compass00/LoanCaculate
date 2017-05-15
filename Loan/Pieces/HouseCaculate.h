@@ -10,9 +10,10 @@
 
 @interface HouseCaculate : NSObject
 
-+ (NSString*)getDeedTax:(NSString*)area isfist:(BOOL)first;
++ (NSString*)getDeedTax:(NSString*)netPrice deedtax:(NSString*)deedtax;
++ (NSString*)getDeedDefaultTax:(NSString*)area isfist:(BOOL)first;
 
-+ (NSString*)getPersonalTax:(BOOL)isFiveYearsAndOnlyOne netPrice:(NSString*)netPrice originalValue:(NSString*)originalValue hourseValue:(NSInteger)hourseValue;
++ (NSString*)getPersonalTax:(BOOL)isFiveYearsAndOnlyOne transactionPrice:(NSString*)tranPrice netPrice:(NSString*)netPrice originalValue:(NSString*)originalValue hourseValue:(NSInteger)hourseValue;
 
 + (NSString*)getSaleTax:(BOOL)isTwoYears netPrice:(NSString*)netPrice originalValue:(NSString*)originalValue hourseValue:(NSInteger)hourseValue;
 
@@ -26,4 +27,5 @@
 
 + (NSString*)getTotalPrice:(NSString*)transactionPrice deedTax:(NSString*)deedTax saleTax:(NSString*)saleTax personalTax:(NSString*)personalTax agencyTax:(NSString*)agencyTax feeforAssignment:(NSString*)feeforAssignment;
 
++ (NSString*)getSinglePrice:(NSString*)totalPrice andArea:(NSString*)area;
 @end

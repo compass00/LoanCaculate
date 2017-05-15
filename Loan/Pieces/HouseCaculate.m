@@ -13,7 +13,13 @@
     return [NSString stringWithFormat: @"%.3f", rate];
 }
 
-+ (NSString*)getDeedTax:(NSString*)area isfist:(BOOL)first {
++ (NSString*)getDeedTax:(NSString*)netPrice deedtax:(NSString*)deedtax {
+    float netPricef = [netPrice floatValue];
+    float deedtaxf = [deedtax floatValue];
+    return [self getStringfromFloat:(netPricef * deedtaxf * 0.01)];
+}
+
++ (NSString*)getDeedDefaultTax:(NSString*)area isfist:(BOOL)first {
     float areaf = [area floatValue];
     float rate = 0.0f;
     if (first) {
@@ -21,10 +27,10 @@
     } else {
         rate = 0.03;
     }
-    return [self getStringfromFloat:(areaf * rate)];
+    return [self getStringfromFloat:rate*100];
 }
 
-+ (NSString*)getPersonalTax:(BOOL)isFiveYearsAndOnlyOne netPrice:(NSString*)netPrice originalValue:(NSString*)originalValue hourseValue:(NSInteger)hourseValue {
++ (NSString*)getPersonalTax:(BOOL)isFiveYearsAndOnlyOne transactionPrice:(NSString*)tranPrice  netPrice:(NSString*)netPrice originalValue:(NSString*)originalValue hourseValue:(NSInteger)hourseValue {
     float rate = 0.0f;
     if (isFiveYearsAndOnlyOne) {
         return [self getStringfromFloat:0.00];
@@ -38,6 +44,9 @@
             rate = netPricef * 0.1;
             rate = netPricef - originalvaluef - rate;
             rate = rate * 0.2;
+        }
+        if (rate < 0) {
+            rate = 0.0;
         }
         return [self getStringfromFloat:rate];
     }
@@ -77,7 +86,7 @@
         return [self getStringfromFloat:0.00f];
     }
     float areaf = [area floatValue];
-    float rate = 15.6 * areaf / 10000.0;
+    float rate = 15.6 * areaf / 10000;
     return [self getStringfromFloat:rate];
 }
 
@@ -86,7 +95,9 @@
     float netPricef = [netPrice floatValue];
     float taxf = [tax floatValue];
     float rate = taxf * netPricef * 0.01;
-    return [self getStringfromFloat:rate];
+    NSInteger money = (NSInteger)rate;
+    return [NSString stringWithFormat:@"%ld", (long)money];
+    //return [self getStringfromFloat:rate];
 }
 
 + (NSString*)getFinalDownPayment:(NSString*)transactionPrice deedTax:(NSString*)deedTax saleTax:(NSString*)saleTax personalTax:(NSString*)personalTax agencyTax:(NSString*)agencyTax feeforAssignment:(NSString*)feeforAssignment finalLoan:(NSString*)finalLoan {
@@ -99,5 +110,16 @@
     float rate = [transactionPrice floatValue] + [deedTax floatValue] + [saleTax floatValue] + [personalTax floatValue] + [agencyTax floatValue] + [feeforAssignment floatValue];
     return [self getStringfromFloat:rate];
 }
+
++ (NSString*)getSinglePrice:(NSString*)totalPrice andArea:(NSString*)area {
+    float total = [totalPrice floatValue];
+    float areaf = [area floatValue];
+    if (areaf < 0.00001) {
+        return @"0.0";
+    }
+    
+    return [NSString stringWithFormat:@"%0.3f", total / areaf];
+}
+
 
 @end

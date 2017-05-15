@@ -14,12 +14,26 @@
 #import "MainFirstTableViewCell.h"
 #import "MainHourseYearsTableViewCell.h"
 #import "AdBanaView.h"
+#import "UIImage_Scale.h"
 
 #define COUNT 16
-#define BannerHeight 56.0
+
+
+#define COLOR_R 154.0/255.0
+#define COLOR_G 222.0/255.0
+#define COLOR_B 134.0/255.0
+#define MAIN_COLOR [UIColor colorWithRed:COLOR_R green:COLOR_G blue:COLOR_B alpha:1.0]
+#define MAIN_TEXT_COLOR [UIColor blackColor]
+#define MAIN_TEXT_SIZE 16
+#define ADBANNA_ID @"20170313000213"
+#define ADBANNA_PLACEMENT @"101056"
+#define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define ADBANNAVIEW_SIZE (isPad? CGSizeMake(728.0, 90.0) : CGSizeMake(320.0,50.0))
+#define ADBANNA_TYPE (isPad? AdBanaViewTypeLargeBanner: AdBanaViewTypeNormalBanner)
 @interface MainTableViewController ()<AdBanaViewDelegate>
 {
     AdBanaView * adview;
+    
 }
 @end
 
@@ -27,6 +41,7 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
+    
     if (self.mainTableviewdelegate !=  nil) {
         [self.mainTableviewdelegate onTouchEnd];
     }
@@ -35,7 +50,6 @@
 
 
 @interface MainTableViewController ()
-@property (strong)HouseValue* houseValue;
 @property (strong)HouseDelegate* houseDelegate;
 @end
 
@@ -50,23 +64,51 @@
         MainTableView* mv = (MainTableView*)self.tableView;
         mv.mainTableviewdelegate = (id)self;
     }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     //self.title = NSLocalizedString(@"STRING_APP_TITLE", @"STRING_APP_TITLE");
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
-    [button setBackgroundColor:[UIColor colorWithRed:154.0/255.0 green:222.0/255.0 blue:134.0/255 alpha:1.0]];
+    [button setBackgroundColor:MAIN_COLOR];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button.layer setCornerRadius:5.0];
+    button.titleLabel.font = [UIFont systemFontOfSize:MAIN_TEXT_SIZE];
     [button setTitle:NSLocalizedString(@"STRING_SNAP", @"STRING_SNAP") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(snap) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.tableView.allowsSelection = NO;
     UISegmentedControl* segment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"STRING_HOUSE", @"STRING_HOUSE"), NSLocalizedString(@"STRING_BISINESS", @"STRING_SNAP"), NSLocalizedString(@"STRING_PUBLIC", @"STRING_PUBLIC"), nil]];
 
+    [segment addTarget:self action:@selector(housevalueChanged:) forControlEvents:UIControlEventValueChanged];
+    segment.tintColor = MAIN_COLOR;
+    
+    NSDictionary *dicselect = [NSDictionary dictionaryWithObjectsAndKeys:MAIN_TEXT_COLOR,
+                         NSForegroundColorAttributeName,
+                         [UIFont boldSystemFontOfSize:15],
+                         NSFontAttributeName,nil];
+    
+    [segment setTitleTextAttributes:dicselect forState:UIControlStateSelected];
+    
+    NSDictionary *dicnomal = [NSDictionary dictionaryWithObjectsAndKeys:MAIN_COLOR,
+                               NSForegroundColorAttributeName,
+                               [UIFont boldSystemFontOfSize:14],
+                               NSFontAttributeName,nil];
+
+    
+    [segment setTitleTextAttributes:dicnomal forState:UIControlStateNormal];
+    
+    
+    segment.selectedSegmentIndex = [_houseDelegate.housevalue getHomeValue];
+   
     [self.navigationController.navigationBar addSubview:segment];
     segment.center = CGPointMake(self.navigationController.navigationBar.center.x, self.navigationController.navigationBar.center.y - 20);
+    
+    [segment addTarget:self action:@selector(changeHouseValue:) forControlEvents:UIControlEventValueChanged];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCheckRadioButton:) name:KNOTIFICATION_RADIO_CHECKED_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onClickRadioButton) name:KNOTIFICATION_RADIO_CHECKED_CLICK object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,30 +145,33 @@
         return 56.0;
     }
     return 88.0;*/
-    if (indexPath.row == 0 || indexPath.row == COUNT - 1) {
-        return BannerHeight;
+    if (indexPath.row == 0) {
+        return ADBANNAVIEW_SIZE.height;
     }
-    return 44.0;
+    return isPad ? 58.0 : 44.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    if (indexPath.row == COUNT - 1) {
+    /*if (indexPath.row == COUNT - 1) {
         MainSubmitViewCell *cell = [MainSubmitViewCell loadfromNib];
         // Configure the cell...
         if (cell != nil) {
+            [cell.submitbuttom setBackgroundColor:MAIN_COLOR];
             [cell.submitbuttom setTitle:NSLocalizedString(@"STRING_SUBMIT", nil) forState:UIControlStateNormal];
-            [cell.submitbuttom addTarget:_houseValue action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.submitbuttom addTarget:_houseDelegate action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
             cell.delegate = (id)self;
         }
         
         return cell;
-    } else if (indexPath.row == 0){
+    } else */if (indexPath.row == 0){
         UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
         if (adview == nil) {
-            adview = [[AdBanaView alloc]initWithAppKey:@"20160818000355" placement:@"100145" adType:AdBanaViewTypeNormalBanner delegate:self];
-            adview.frame=CGRectMake(0, 0, self.tableView.frame.size.width, BannerHeight);
+            adview = [[AdBanaView alloc] initWithAppKey:ADBANNA_ID placement:ADBANNA_PLACEMENT adType:ADBANNA_TYPE delegate:self];
+            
+            
+            adview.frame = CGRectMake((self.tableView.frame.size.width - ADBANNAVIEW_SIZE.width) / 2, 0, ADBANNAVIEW_SIZE.width, ADBANNAVIEW_SIZE.height);
         }
         [cell.contentView addSubview:adview];
 
@@ -134,15 +179,26 @@
     } else if (indexPath.row == 5){
         MainFirstTableViewCell *cell = [MainFirstTableViewCell loadfromNib];
         // Configure the cell...
+        [cell configButton:[_houseDelegate.housevalue getIsFirst]];
         return cell;
     } else if (indexPath.row == 7){
         MainHourseYearsTableViewCell *cell = [MainHourseYearsTableViewCell loadfromNib];
+        BOOL isFive = [_houseDelegate.housevalue getIsFiveYearsAndOnlyOne];
+        BOOL isTwo  = [_houseDelegate.housevalue getIsTwoYears];
+        BOOL isNot = !(isFive || isTwo);
+        [cell configButton:isFive withTwoYears:isTwo withNotTwo:isNot];
     // Configure the cell...
         return cell;
     } else {
         MainTableViewCell *cell = [MainTableViewCell loadfromNib];
         // Configure the cell...
         if (cell != nil) {
+            cell.textfield.row = indexPath.row;
+            cell.textfield.index = 1;
+            cell.textfield.tag = 100 + indexPath.row;
+            cell.textfieldtax.row = indexPath.row;
+            cell.textfieldtax.index = 0;
+            
             cell.housetitle.text = [HouseStrings getTitle:(HOUSEVALUETYPE)indexPath.row];
             cell.houseinfo.text = [HouseStrings getInformation:(HOUSEVALUETYPE)indexPath.row];
             BOOL showSegment = [HouseStrings getShowSegment:(HOUSEVALUETYPE)indexPath.row];
@@ -150,21 +206,26 @@
             cell.textfieldtax.hidden = ![HouseStrings getShowTaxFiled:(HOUSEVALUETYPE)indexPath.row];
             cell.textfield.delegate = _houseDelegate;
             cell.textfieldtax.delegate = _houseDelegate;
-            cell.textfield.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            cell.textfield.keyboardType = UIKeyboardTypeDecimalPad;
             cell.textfield.returnKeyType = UIReturnKeyDone;
-            cell.textfieldtax.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            cell.textfieldtax.keyboardType = UIKeyboardTypeDecimalPad;
             cell.textfieldtax.returnKeyType = UIReturnKeyDone;
+            cell.textfield.textColor = [HouseStrings getTextColor:(HOUSEVALUETYPE)indexPath.row];
 
-            cell.textfield.enabled = ![HouseStrings getEnableFiled:(HOUSEVALUETYPE)indexPath.row];
+            if (indexPath.row == HOUSEVALUETYPE_ORIGINAL_VALUE) {
+                if ([_houseDelegate.housevalue getHomeValue] == 2) {
+                    cell.textfield.enabled = NO;
+                }
+            } else {
+                cell.textfield.enabled = ![HouseStrings getEnableFiled:(HOUSEVALUETYPE)indexPath.row];
+            }
             cell.textfieldtax.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:0];
             cell.textfield.text = [_houseDelegate getDefaultValue:(HOUSEVALUETYPE)indexPath.row position:1];
            
-            cell.taxunit.hidden = cell.textfieldtax.hidden;
+            cell.taxunit.hidden = cell.textfieldtax.hidden || ![HouseStrings getShowUnit:(HOUSEVALUETYPE)indexPath.row];;
+;
 
-            cell.textfield.row = indexPath.row;
-            cell.textfield.index = 1;
-            cell.textfieldtax.row = indexPath.row;
-            cell.textfieldtax.index = 0;
+ 
         }
         
         return cell;
@@ -228,13 +289,21 @@
 
 - (void)snap {
     UIImage* savedImage  = [self imageWithView1:self.tableView];
-    [self saveImageToPhotos:savedImage];
+    UITableView *scrollView = self.tableView;
+    CGFloat scale = [UIScreen mainScreen].scale;
+
+    UIImage* clipimage = [savedImage getSubImage:CGRectMake(0, ADBANNAVIEW_SIZE.height*scale, scrollView.contentSize.width*scale, (scrollView.contentSize.height - ADBANNAVIEW_SIZE.height)*scale)];
+    [self saveImageToPhotos:clipimage];
+}
+
+- (void)housevalueChanged:(UISegmentedControl*)segement {
+    [_houseDelegate.housevalue setHomeValue:segement.selectedSegmentIndex];
 }
 
 - (UIImage *) imageWithView1:(UIView *)view{
     UIImage *viewImage = nil;
     UITableView *scrollView = self.tableView;
-    CGSize sz = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height - 2 *BannerHeight);
+    CGSize sz = CGSizeMake(scrollView.contentSize.width, scrollView.contentSize.height);
     UIGraphicsBeginImageContextWithOptions(sz, scrollView.opaque, 0.0);
     {
         CGContextRef newContext = UIGraphicsGetCurrentContext();
@@ -244,8 +313,8 @@
         CGPoint savedContentOffset = scrollView.contentOffset;
         CGRect savedFrame = scrollView.frame;
         
-        scrollView.contentOffset = CGPointMake(0, BannerHeight);
-        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height - 2 * BannerHeight);
+        scrollView.contentOffset = CGPointMake(0, 0);
+        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height);
         
         [scrollView.layer renderInContext: newContext];
         viewImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -317,6 +386,71 @@
     NSLog(@"横幅广告点击了....");
 }
 
+- (void)onCheckRadioButton:(NSNotification*)obj {
+    NSDictionary* dic = obj.object;
+    NSString* tag = [dic objectForKey:KEY_TAG];
+    NSString* checked = [dic objectForKey:KEY_CHECKED];
+    NSInteger tagvalue = tag.integerValue;
+    BOOL checkValue = checked.intValue == 1;
+    switch (tagvalue) {
+        case TAG_FIRST_HOURSE:
+            if (checkValue) {
+                [_houseDelegate.housevalue setIsFirst:checkValue];
+            }
+            break;
+        case TAG_SCOND_HOURSE:
+            if (checkValue) {
+                [_houseDelegate.housevalue setIsFirst:!checkValue];
+            }
+            break;
+        case TAG_FIVE_ONYLE:
+            if (checkValue) {
+                [_houseDelegate.housevalue setIsFiveYearsAndOnlyOne:checkValue];
+                [_houseDelegate.housevalue setIsTwoYears:!checkValue];
+            }
+            break;
+            
+        case TAG_TWO_YEARS:
+            if (checkValue) {
+                [_houseDelegate.housevalue setIsTwoYears:checkValue];
+                [_houseDelegate.housevalue setIsFiveYearsAndOnlyOne:!checkValue];
+            }
+            break;
+        case TAG_NOT_TWO_YEARS:
+            if (checkValue) {
+                [_houseDelegate.housevalue setIsTwoYears:!checkValue];
+                [_houseDelegate.housevalue setIsFiveYearsAndOnlyOne:!checkValue];
+            }
+            
+            break;
+        default:
+            break;
+    }
+  
+}
 
+- (void)onClickRadioButton {
+    [_houseDelegate resginKeyboard];
+
+    [_houseDelegate.housevalue backDefaultDeedTax];
+    [_houseDelegate.housevalue backPersonalTax];
+    if ([_houseDelegate.housevalue getHomeValue] == 2) {
+        [_houseDelegate.housevalue setPersonalTax:@"1"];
+    }
+    [_houseDelegate.housevalue backRatioOfLoan];
+    [self didCalculate];
+}
+
+- (void)changeHouseValue:(id)sender {
+    [_houseDelegate resginKeyboard];
+
+    UISegmentedControl* seg = (UISegmentedControl*)sender;
+    [_houseDelegate.housevalue setHomeValue:seg.selectedSegmentIndex];
+    [ _houseDelegate.housevalue backOriginalValue];
+    if ([_houseDelegate.housevalue getHomeValue] == 2) {
+        [_houseDelegate.housevalue setPersonalTax:@"1"];
+    }
+    [self didCalculate];
+}
 
 @end

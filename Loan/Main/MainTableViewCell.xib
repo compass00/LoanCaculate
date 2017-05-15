@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="352" height="62"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fIq-iW-rw3" id="l5b-qI-DM6">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="62"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3bC-yY-HO5" customClass="HouseTextField">
@@ -37,7 +37,7 @@
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaP-sf-nbD" customClass="HouseTextField">
                         <rect key="frame" x="155" y="14" width="65" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="gq5-3U-aVT"/>
+                            <constraint firstAttribute="width" constant="110" id="gq5-3U-aVT"/>
                         </constraints>
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>

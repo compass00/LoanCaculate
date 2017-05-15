@@ -44,7 +44,7 @@
 - (NSString*)getArea {
     NSString* area = [_valuedic objectForKey:KEY_HOUSEVALUETYPE_AREA];
     if (area == nil || area.length < 1) {
-         area = @"57.43";
+         area = @"57.34";
         [self setArea:area];
     }
     return area;
@@ -57,6 +57,10 @@
     }
 
     [_valuedic setObject:value forKey:KEY_HOUSEVALUETYPE_TRASACTION_PRICE];
+    
+    float defaultNetPrice = [value floatValue] * 0.9;
+    NSString* p = [NSString stringWithFormat: @"%d", (NSInteger)defaultNetPrice];
+    [self setNetPrice:p];
 }
 
 - (NSString*)getTransactionPrice {
@@ -80,7 +84,8 @@
 - (NSString*)getNetPrice {
     NSString* p=  [_valuedic objectForKey:KEY_HOUSEVALUETYPE_NET_PRICE];
     if (p == nil || p.length < 1) {
-        p = @"318";
+        float defaultNetPrice = [[self getTransactionPrice] floatValue] * 0.9;
+        p = [NSString stringWithFormat: @"%ld", (long)defaultNetPrice];
         [self setNetPrice:p];
     }
     return p;
@@ -119,9 +124,15 @@
     return value;
 }
 
+- (void)backOriginalValue {
+    if ([self getHomeValue] == 2) {
+        [self setOriginalValue:@"0"];
+    }
+}
 
 - (void)setIsFirst:(BOOL)value {
     [_valuedic setObject:@(value) forKey:KEY_HOUSEVALUETYPE_FIRST];
+    
 }
 
 - (BOOL)getIsFirst {
@@ -142,19 +153,22 @@
 
 }
 
+- (void)backDefaultDeedTax {
+    NSString* value = [HouseCaculate getDeedDefaultTax:[self getArea] isfist:[self getIsFirst]];
+        [self setDeedTax:value];
+}
+
 - (NSString*)getDeedTax {
     NSString* value =  [_valuedic objectForKey:KEY_HOUSEVALUETYPE_DEED_TAX];
     if (value == nil || value.length < 1) {
-        value = @"3";
+        value = [HouseCaculate getDeedDefaultTax:[self getArea] isfist:[self getIsFirst]];
         [self setDeedTax:value];
     }
     return value;
 }
 
 - (NSString*)getDeedTaxCalculation {
-    BOOL isfirst = [self getIsFirst];
-    NSString* area = [self getArea];
-    return [HouseCaculate getDeedTax:area isfist:isfirst];
+    return [HouseCaculate getDeedTax:[self getNetPrice] deedtax:[self getDeedTax]];
 }
 
 - (void)setDeedTaxCalculation:(NSString*)value {
@@ -168,6 +182,9 @@
 
 - (void)setIsFiveYearsAndOnlyOne:(BOOL)value {
     [_valuedic setObject:@(value) forKey:KEY_HOUSEVALUETYPE_FIVEYEARS_ONLYONE];
+    if (value) {
+        [_valuedic setObject:@(!value) forKey:KEY_HOUSEVALUETYPE_TWOYEARS];
+    }
 }
 
 - (BOOL)getIsFiveYearsAndOnlyOne {
@@ -187,6 +204,14 @@
     [_valuedic setObject:value forKey:KEY_HOUSEVALUETYPE_PERSONAL_TAX];
 }
 
+- (void)backPersonalTax {
+    if ([self getIsFiveYearsAndOnlyOne]) {
+        [self setPersonalTax:@"0"];
+    } else {
+        [self setPersonalTax:@"20"];
+    }
+}
+
 - (NSString*)getPersonalTax {
     NSString* value = [_valuedic objectForKey:KEY_HOUSEVALUETYPE_PERSONAL_TAX];
     if (value == nil || value.length < 1) {
@@ -200,7 +225,7 @@
 - (NSString*)getPersonalTaxCalculation {
     
     BOOL isFive = [self getIsFiveYearsAndOnlyOne];
-    return [HouseCaculate getPersonalTax:isFive netPrice:[self getNetPrice] originalValue:[self getOriginalValue] hourseValue:[self getHomeValue]];
+    return [HouseCaculate getPersonalTax:isFive transactionPrice:[self getTransactionPrice] netPrice:[self getNetPrice] originalValue:[self getOriginalValue] hourseValue:[self getHomeValue]];
 }
 
 - (void)setPersonalTaxCalculation:(NSString*)value {
@@ -213,6 +238,9 @@
 
 - (void)setIsTwoYears:(BOOL)value {
     [_valuedic setObject:@(value) forKey:KEY_HOUSEVALUETYPE_TWOYEARS];
+    if (value) {
+        [self setIsFiveYearsAndOnlyOne:NO];
+    }
 }
 
 - (BOOL)getIsTwoYears {
@@ -220,7 +248,7 @@
     if (value != nil) {
         return [value integerValue];
     }
-    return 1;
+    return 0;
 }
 
 
@@ -242,7 +270,8 @@
 }
 
 - (NSString*)getSaleTaxCalculation {
-    return [HouseCaculate getSaleTax:[self getIsTwoYears] netPrice:[self getNetPrice] originalValue:[self getOriginalValue] hourseValue:[self getHomeValue]];
+    BOOL bIsTwoYears = [self getIsTwoYears] || [self getIsFiveYearsAndOnlyOne];
+    return [HouseCaculate getSaleTax:bIsTwoYears netPrice:[self getNetPrice] originalValue:[self getOriginalValue] hourseValue:[self getHomeValue]];
 }
 
 - (void)setSaleTaxCalculation:(NSString*)value {
@@ -297,7 +326,7 @@
 - (NSString*)getFeesforAssignment {
     NSString* value =  [_valuedic objectForKey:KEY_HOUSEVALUETYPE_FEESFORASSIGNMENT];
     if (value == nil || value.length < 1) {
-        value = @"0.00156";
+        value = @"15.6";
         [self setFeesforAssignment:value];
     }
     return value;
@@ -313,6 +342,14 @@
     }
     [_valuedic setObject:value forKey:KEY_HOUSEVALUETYPE_FEESFORASSIGNMENT_CAL];
 
+}
+
+- (void)backRatioOfLoan {
+    if ([self getIsFirst]) {
+        [self setRatioOfLoan:@"70"];
+    } else {
+        [self setRatioOfLoan:@"20"];
+    }
 }
 
 - (void)setRatioOfLoan:(NSString*)value {
@@ -368,5 +405,18 @@
     
     [_valuedic setObject:value forKey:KEY_HOUSEVALUETYPE_TOTAL_PRICE_CAL];
 }
+
+- (NSString*)getSinglePriceCalculation {
+    return [HouseCaculate getSinglePrice:[self getTotalPriceCalculation] andArea:[self getArea]];
+}
+
+- (void)setSinglePriceCalculation:(NSString*)value {
+    if (value == nil) {
+        return;
+    }
+    
+    [_valuedic setObject:value forKey:KEY_HOUSEVALUETYPE_SINGLE_PRICE_CAL];
+}
+
 
 @end

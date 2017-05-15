@@ -31,7 +31,9 @@
 #define KEY_HOUSEVALUETYPE_DOWN_PAYMENT @"DownPayment"
 #define KEY_HOUSEVALUETYPE_DOWN_PAYMENT_CAL @"DownPaymentCal"
 #define KEY_HOUSEVALUETYPE_TOTAL_PRICE @"TotalPriceCal"
-#define KEY_HOUSEVALUETYPE_TOTAL_PRICE_CAL @"TotalPriceCal"
+#define KEY_HOUSEVALUETYPE_TOTAL_PRICE_CAL @"TotalPrice"
+#define KEY_HOUSEVALUETYPE_SINGLE_PRICE @"TotalPrice"
+#define KEY_HOUSEVALUETYPE_SINGLE_PRICE_CAL @"TotalPriceCal"
 
 @interface HouseValue : NSObject
 
@@ -48,13 +50,14 @@
 
 - (void)setHomeValue:(NSInteger)value;
 - (NSInteger)getHomeValue;
-
 - (void)setOriginalValue:(NSString*)value;
 - (NSString*)getOriginalValue;
+- (void)backOriginalValue;
 
 - (void)setIsFirst:(BOOL)value;
 - (BOOL)getIsFirst;
 
+- (void)backDefaultDeedTax;
 - (void)setDeedTax:(NSString*)value;
 - (NSString*)getDeedTax;
 - (NSString*)getDeedTaxCalculation;
@@ -63,6 +66,7 @@
 - (void)setIsFiveYearsAndOnlyOne:(BOOL)value;
 - (BOOL)getIsFiveYearsAndOnlyOne;
 
+- (void)backPersonalTax;
 - (void)setPersonalTax:(NSString*)value;
 - (NSString*)getPersonalTax;
 - (NSString*)getPersonalTaxCalculation;
@@ -86,6 +90,7 @@
 - (NSString*)getFeesforAssignmentCalculation;
 - (void)setFeesforAssignmentCalculation:(NSString*)value;
 
+- (void)backRatioOfLoan;
 - (void)setRatioOfLoan:(NSString*)value;
 - (NSString*)getRatioOfLoan;
 - (NSString*)getRatioOfLoanCalculation;
@@ -96,4 +101,7 @@
 
 - (NSString*)getTotalPriceCalculation;
 - (void)setTotalPriceCalculation:(NSString*)value;
+
+- (NSString*)getSinglePriceCalculation;
+- (void)setSinglePriceCalculation:(NSString*)value;
 @end

@@ -35,6 +35,7 @@
                           NSLocalizedString(@"STRING_HOUSE_RATIO_OF_LOAN", nil),
                           NSLocalizedString(@"STRING_HOUSE_DOWN_PAYMENT", nil),
                           NSLocalizedString(@"STRING_HOUSE_TOTAL_PRICE", nil),
+                          NSLocalizedString(@"STRING_HOUSE_SINGLE_PRICE", nil),
                           nil];
     });
     return sharedInstance;
@@ -174,16 +175,30 @@
 }
 
 +(BOOL)getShowTaxFiled:(HOUSEVALUETYPE)type {
-    if (type == HOUSEVALUETYPE_DEED_TAX || type == HOUSEVALUETYPE_PERSONAL_TAX ||  type == HOUSEVALUETYPE_SALE_TAX|| type == HOUSEVALUETYPE_AGENCY || type == HOUSEVALUETYPE_FEESFORASSIGNMENT || type == HOUSEVALUETYPE_RATIO_OF_LOAN) {
+    if (type == HOUSEVALUETYPE_DEED_TAX || type == HOUSEVALUETYPE_AGENCY || type == HOUSEVALUETYPE_FEESFORASSIGNMENT || type == HOUSEVALUETYPE_RATIO_OF_LOAN) {
         return YES;
     }
     return NO;
 }
 
 +(BOOL)getEnableFiled:(HOUSEVALUETYPE)type {
-    if (type == HOUSEVALUETYPE_DEED_TAX || type == HOUSEVALUETYPE_PERSONAL_TAX ||  type == HOUSEVALUETYPE_SALE_TAX|| type == HOUSEVALUETYPE_AGENCY || type == HOUSEVALUETYPE_FEESFORASSIGNMENT || type == HOUSEVALUETYPE_RATIO_OF_LOAN || type == HOUSEVALUETYPE_DOWN_PAYMENT || type == HOUSEVALUETYPE_TOTAL_PRICE) {
+    if (type == HOUSEVALUETYPE_DEED_TAX || type == HOUSEVALUETYPE_PERSONAL_TAX ||  type == HOUSEVALUETYPE_SALE_TAX|| type == HOUSEVALUETYPE_AGENCY || type == HOUSEVALUETYPE_FEESFORASSIGNMENT || type == HOUSEVALUETYPE_RATIO_OF_LOAN || type == HOUSEVALUETYPE_DOWN_PAYMENT || type == HOUSEVALUETYPE_TOTAL_PRICE || type == HOUSEVALUETYPE_SIGNLE_PRICE) {
         return YES;
     }
     return NO;
 }
+
++(BOOL)getShowUnit:(HOUSEVALUETYPE)type {
+    return (type != HOUSEVALUETYPE_FEESFORASSIGNMENT);
+}
+
++ (UIColor*)getTextColor:(HOUSEVALUETYPE)type {
+    if (type == HOUSEVALUETYPE_DOWN_PAYMENT || type == HOUSEVALUETYPE_TOTAL_PRICE || type == HOUSEVALUETYPE_SIGNLE_PRICE) {
+        return RED_COLOR;
+
+    }
+    
+    return BLACK_COLOR;
+}
+
 @end

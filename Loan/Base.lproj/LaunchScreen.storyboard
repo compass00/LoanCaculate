@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,23 +21,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="house.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="djt-hY-Es6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="djt-hY-Es6">
                                 <rect key="frame" x="27" y="104" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="0tQ-ob-GWU"/>
+                                    <constraint firstAttribute="width" constant="320" id="PGR-bh-VNY"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="房屋计算器" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmr-sC-HZJ">
+                                <rect key="frame" x="114" y="647" width="147" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="djt-hY-Es6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="B5w-A9-ruF"/>
-                            <constraint firstItem="djt-hY-Es6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="104" id="HRS-Tr-NxY"/>
+                            <constraint firstItem="djt-hY-Es6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="r4X-Um-1HM"/>
+                            <constraint firstItem="Gmr-sC-HZJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="reK-Ih-KYc"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Gmr-sC-HZJ" secondAttribute="bottom" constant="68" id="u8R-lb-Auz"/>
+                            <constraint firstItem="djt-hY-Es6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="xEg-wN-ixJ"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="50.724637681159422" y="374.18478260869568"/>
         </scene>
     </scenes>
     <resources>
-        <image name="house.jpg" width="900" height="900"/>
+        <image name="splash.png" width="900" height="900"/>
     </resources>
 </document>

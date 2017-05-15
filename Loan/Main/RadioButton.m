@@ -25,10 +25,54 @@
 
 #import "RadioButton.h"
 
-@interface RadioButton()
+
+@interface RaidoButtonGroup()
 {
-	NSMutableArray* _sharedLinks;
+    NSMutableArray* _goup;
 }
+@end
+
+@implementation RaidoButtonGroup
+- (void)addGroup:(RadioButton*)button {
+    if (_goup == nil) {
+        _goup = [[NSMutableArray alloc] init];
+    }
+    [_goup addObject:button];
+    [button addTarget:self action:@selector(onTouchUpInsideCheck:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setChecked:(RadioButton*)button {
+    [button setChecked:YES];
+    for (RadioButton* b in _goup) {
+        if (b != button) {
+            [b setChecked:NO];
+        }
+    }
+}
+
+-(void) onTouchUpInsideCheck:(id)sender
+{
+    RadioButton* button = (RadioButton*)sender;
+    if ([_goup count] == 1) {
+        [button setChecked:!button.checked];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_RADIO_CHECKED_CLICK object:nil];
+
+        return;
+    }
+    
+    if (button.checked) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_RADIO_CHECKED_CLICK object:nil];
+        return;
+    }
+    [button setChecked:!button.checked];
+    for (RadioButton* b in _goup) {
+        if (b != button) {
+            [b setChecked:NO];
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_RADIO_CHECKED_CLICK object:nil];
+}
+
 @end
 
 @implementation RadioButton
@@ -36,27 +80,29 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    [self setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateSelected];
-    [self addTarget:self action:@selector(onTouchUpInsideCheck) forControlEvents:UIControlEventTouchUpInside];
-
+    self.checked = NO;
     return self;
 }
 
 -(void) awakeFromNib
 {
     [super awakeFromNib];
-    [self setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateSelected];
-    [self addTarget:self action:@selector(onTouchUpInsideCheck) forControlEvents:UIControlEventTouchUpInside];
+    _checked = NO;
+
 	/*if(![[self allTargets] containsObject:self]) {
 		[super addTarget:self action:@selector(onTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
 	}*/
 }
 
--(void) onTouchUpInsideCheck
-{
-    [self setSelected:!self.selected];
+- (void)setChecked:(BOOL)checked {
+    _checked = checked;
+    NSDictionary* ob = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.tag], KEY_TAG, [NSString stringWithFormat:@"%d", checked], KEY_CHECKED, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_RADIO_CHECKED_CHANGE object:ob];
+    if (checked) {
+        [self setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
+    } else {
+        [self setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+    }
 }
 
 

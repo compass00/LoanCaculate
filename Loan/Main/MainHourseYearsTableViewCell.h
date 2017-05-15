@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RadioButton.h"
 @interface MainHourseYearsTableViewCell : UITableViewCell
-+(instancetype)loadfromNib;
+@property(strong) IBOutlet RadioButton* fiveYearsButton;
+@property(strong) IBOutlet RadioButton* TwoYearsButton;
+@property(strong) IBOutlet RadioButton* NotTwoYearsButton;
 
++(instancetype)loadfromNib;
+- (void)configButton:(BOOL)isFive withTwoYears:(BOOL)isTwo withNotTwo:(BOOL)isNot;
 @end

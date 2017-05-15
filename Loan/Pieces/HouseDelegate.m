@@ -35,8 +35,8 @@
     
     HouseTextField* t = (HouseTextField*)textField;
     NSLog(@"text : %@", t.text);
-    NSLog(@"row : %d", t.row);
-    NSLog(@"index :%d", t.index);
+    //NSLog(@"row : %d", t.row);
+    //NSLog(@"index :%d", t.index);
     switch (t.row) {
             // 0
         case  HOUSEVALUETYPE_AREA:
@@ -70,7 +70,7 @@
         case  HOUSEVALUETYPE_ORIGINAL_VALUE:
         {
             if (t.index == 1) {
-                [_housevalue setNetPrice:t.text];
+                [_housevalue setOriginalValue:t.text];
             }
             break;
             
@@ -102,7 +102,7 @@
         case  HOUSEVALUETYPE_SALE_TAX:
         {
             if (t.index == 0) {
-                [_housevalue setPersonalTax:t.text];
+                [_housevalue setSaleTax:t.text];
             }
             break;
         }
@@ -147,6 +147,7 @@
 {
     //HouseTextField* t = (HouseTextField*)textField;
     [textField resignFirstResponder];
+    [self submit:nil];
     return YES;
 }
 
@@ -182,8 +183,8 @@
 }
 
 - (void)changeSegment:(id)sender {
-    UISegmentedControl* segment = (UISegmentedControl*)sender;
-    /*if (segment.tag == HOUSEVALUETYPE_HOME_VALUE) {
+    /*UISegmentedControl* segment = (UISegmentedControl*)sender;
+    if (segment.tag == HOUSEVALUETYPE_HOME_VALUE) {
         [_housevalue setHomeValue:segment.selectedSegmentIndex];
     } else if (segment.tag == HOUSEVALUETYPE_FIRST) {
         [_housevalue setIsFirst:!segment.selectedSegmentIndex];
@@ -346,7 +347,12 @@
                 return [_housevalue getTotalPriceCalculation];
             }
                 break;
-            
+        case  HOUSEVALUETYPE_SIGNLE_PRICE:
+            if (pos == 1) {
+                return [_housevalue getSinglePriceCalculation];
+            }
+            break;
+         
         default:
             
             break;
@@ -357,6 +363,8 @@
 }
 
 - (void)resginKeyboard {
+    [self submit:nil];
+
     if (_currentTextField != nil) {
         [_currentTextField resignFirstResponder];
     }
